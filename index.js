@@ -2,31 +2,13 @@ const express = require("express");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
+app.use(express.text());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/miarchivo", (req, res) => {
-  res.sendFile("./cat.png", {
-    root: __dirname,
-  });
-});
-
-app.get("/user", (req, res) => {
-  res.json({
-    name: "Angel",
-    lastname: "ray",
-    age: 40,
-    points: [1, 2, 3],
-    address: {
-      city: "New York",
-      street: "some street 123",
-    },
-  });
-});
-
-app.get("/isAlive", (req, res) => {
-  res.sendStatus(204);
+app.post("/user", (req, res) => {
+  console.log(req.body);
+  res.send("Nuevo usuario creado");
 });
 
 app.listen(3001);
